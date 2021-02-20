@@ -1,13 +1,8 @@
 {
-    "cmd_list": [
-        {"cmd": "cp", 
-        "args": ["/mnt/data/rockrobo/backup/*", "/mnt/data/rockrobo/"]
-        },
-        {"cmd": "sync", 
-            "args": []
-        },
-        {"cmd": "killall", 
-        "args": ["player"]
-        }
+    "cmds": [
+        "echo hello world",
+        "cp /mnt/data/rockrobo/backup/* /mnt/data/rockrobo/",
+        "sync", 
+        "killall player"
     ]
 }

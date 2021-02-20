@@ -38,13 +38,8 @@ type Resetter struct {
 	proxy  *Proxy
 }
 
-type Command struct {
-	Command string   `json:"cmd"`
-	Args    []string `json:"args"`
-}
-
 type CommandList struct {
-	Commands []Command `json:"cmd_list"`
+	Commands []string `json:"cmds"`
 }
 
 func main() {
@@ -135,8 +130,8 @@ func runMapReload() error {
 		log.Error(err)
 	}
 	for _, cmd := range cmds.Commands {
-		out, err := exec.Command(cmd.Command, cmd.Args...).Output()
-		log.Debug(out)
+		log.Debug(fmt.Printf("running comnand: %v", cmd))
+		_, err := exec.Command("sh", "-c", cmd).Output()
 		if err != nil {
 			log.Error(err)
 			return err
