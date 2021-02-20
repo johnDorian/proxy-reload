@@ -1,0 +1,13 @@
+{
+    "cmd_list": [
+        {"cmd": "cp", 
+        "args": ["/mnt/data/rockrobo/backup/*", "/mnt/data/rockrobo/"]
+        },
+        {"cmd": "sync", 
+            "args": []
+        },
+        {"cmd": "killall", 
+        "args": ["player"]
+        }
+    ]
+}
