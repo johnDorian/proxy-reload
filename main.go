@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"os"
 	"os/exec"
 	"sync"
 	"time"
@@ -16,6 +17,14 @@ import (
 	"github.com/gorilla/mux"
 	log "github.com/sirupsen/logrus"
 )
+
+var version = "v0.0.1"
+
+//go:embed "refresh.html"
+var refresh string
+
+//go:embed "cmds.json"
+var cmdInput []byte
 
 type Proxy struct {
 	mu          sync.Mutex
@@ -38,19 +47,19 @@ type CommandList struct {
 	Commands []Command `json:"cmd_list"`
 }
 
-//go:embed "refresh.html"
-var refresh string
-
-//go:embed "cmds.json"
-var cmdInput []byte
-
 func main() {
 	upstream := flag.String("upstream", "localhost:8080", "upstream url")
 	addr := flag.String("addr", "localhost", "This url")
 	logLevel := flag.String("log_level", "error", "WHat level of logging")
 	waitTime := flag.Int("wait_time", 60, "How many seconds should the service be down")
+	printVersion := flag.Bool("version", false, "print version number")
 
 	flag.Parse()
+
+	if *printVersion {
+		fmt.Println(version)
+		os.Exit(0)
+	}
 
 	ll, err := log.ParseLevel(*logLevel)
 	if err != nil {
