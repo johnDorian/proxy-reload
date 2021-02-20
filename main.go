@@ -18,7 +18,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-var version = "v0.0.1"
+var version = "v0.0.2"
 
 //go:embed "refresh.html"
 var refresh string
