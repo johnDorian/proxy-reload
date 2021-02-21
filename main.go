@@ -101,8 +101,7 @@ func (v Resetter) reloadMap() http.HandlerFunc {
 			fmt.Fprint(w, err)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
-		fmt.Fprint(w, "OK")
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 }
 
